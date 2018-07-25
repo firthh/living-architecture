@@ -3,6 +3,7 @@
                  [org.clojure/clojurescript "1.10.238"]
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
+                 [cljs-ajax "0.7.4"]
                  [compojure "1.5.0"]
                  [cheshire "5.8.0"]
                  [yogthos/config "0.8"]

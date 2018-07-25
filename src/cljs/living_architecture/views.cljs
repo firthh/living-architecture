@@ -2,7 +2,8 @@
   (:require
    [re-frame.core :as re-frame]
    [living-architecture.subs :as subs]
-   ))
+   [living-architecture.events :as events]
+   [living-architecture.http :as http]))
 
 (defn metric-component [{:keys [name value position]}]
   [:tspan position (str name " - " value)])
@@ -22,7 +23,7 @@
      [:text {:x pad-left :y 0
              :text-anchor "middle"}
       [:tspan {:y pad-top
-               :style {"font-weight" "bold"}} name]
+               :style {"fontWeight" "bold"}} name]
       (map-indexed (fn [idx m]
                      ^{:key (str "component-" name "-" (:name m))}
                      [metric-component (assoc m :position {:x pad-left :y (+ (* 3 pad-top) (* line-size idx))})])
@@ -43,4 +44,5 @@
         diagram (re-frame/subscribe [::subs/diagram])]
     [:div
      [:h1 "Hello from " @name]
+     [:div [:button {:on-click #(re-frame/dispatch [::events/get-diagram "123"])} "Get diagram"]]
      [diagram-components @diagram]]))
