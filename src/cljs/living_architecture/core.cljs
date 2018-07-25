@@ -3,6 +3,7 @@
    [reagent.core :as reagent]
    [re-frame.core :as re-frame]
    [living-architecture.events :as events]
+   [living-architecture.event-listeners] ; not used but the code needs to be required
    [living-architecture.views :as views]
    [living-architecture.config :as config]
    ))
