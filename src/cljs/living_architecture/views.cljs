@@ -18,6 +18,19 @@
 
 (def line-size 20)
 
+(defn database-component [{:keys [name metrics] {:keys [x y]} :position}]
+  [:svg {:x x :y y :width 500 :height 500
+         :style {:outline "0px solid black"
+                 :background-color "#fff"}}
+   [:path {:fill "none" :stroke "black" :stroke-width "1px"
+           :d "M1 50
+               C 0 0, 300 0, 300 50
+               C 300 100, 0 100, 1 50
+               V 250
+               C 0 300, 300 300, 300 250
+               V 50"}]
+])
+
 (defn box-component [{:keys [name metrics] {:keys [x y]} :position}]
   (let [pad-top 20
         pad-left "50%"]
@@ -26,7 +39,7 @@
      [:rect {:x 0 :y 0
              :height "100%" :width "100%"
              :style {:fill "white"
-                     :stroke-width 1
+                     :stroke-width 3
                      :stroke "black"}}]
      [:text {:x pad-left :y 0
              :text-anchor "middle"}
@@ -43,6 +56,7 @@
          :id "canvas"
          :style {:outline "2px solid black"
                  :background-color "#fff"}}
+   [database-component {:position {:x 5 :y 250}}]
    (for [c diagram]
      ^{:key (str "component-" (:id c))}
      [box-component c])])
