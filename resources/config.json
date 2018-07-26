@@ -29,13 +29,46 @@
             "query": "node_filesystem_free{mountpoint=\"/\"} / node_filesystem_size{mountpoint=\"/\"} * 100"
         }
     },
-	"diagram": [{
-			"name": "Load Balancer 1",
+	  "diagram": [
+    {
+			"name": "Reverse Proxy",
+      "type": "box",
+			"id": "rp1",
+			"position": {
+				"x": 300,
+				"y": 20
+			},
+			"metrics": [{
+					"id": "avg_http_response_time"
+				},
+				{
+					"id": "sum_http_requests_handled"
+				}
+			]
+		},
+    {
+			"name": "ELB",
       "type": "box",
 			"id": "lb1",
 			"position": {
 				"x": 100,
-				"y": 100
+				"y": 200
+			},
+			"metrics": [{
+					"id": "avg_http_response_time"
+				},
+				{
+					"id": "sum_http_requests_handled"
+				}
+			]
+		},
+    {
+			"name": "App Server",
+      "type": "box",
+			"id": "app1",
+			"position": {
+				"x": 100,
+				"y": 380
 			},
 			"metrics": [{
 					"id": "avg_http_response_time"
@@ -46,33 +79,57 @@
 			]
 		},
 		{
-			"name": "Load Balancer 2",
+			"name": "Legacy ELB",
       "type": "box",
 			"id": "lb2",
 			"position": {
 				"x": 500,
-				"y": 100
+				"y": 200
 			},
-			"metrics": [{
-					"id": "avg_http_response_time"
-				},
-				{
-					"id": "sum_http_requests_handled"
-				}
-			]
+			  "metrics": []
+		},
+    {
+			"name": "Legacy App server",
+      "type": "box",
+			"id": "app2",
+			"position": {
+				"x": 500,
+				"y": 380
+			},
+			  "metrics": []
 		},
 		{
-			"name": "DB-001",
+			"name": "Master",
       "type": "database",
 			"id": "db001",
 			"position": {
-				"x": 200,
-				"y": 300
+				"x": 300,
+				"y": 550
 			},
 			"metrics": [{
 					"id": "disk_usage"
 			  }
 			]
-		}
+		},
+    {
+			"name": "Replica",
+      "type": "database",
+			"id": "db002",
+			"position": {
+				"x": 600,
+				"y": 650
+			},
+			"metrics": [{
+					"id": "disk_usage"
+			  }
+			]
+		},
+        { "type": "arrow", "id": "l1", "position": {"x1": 400, "y1": 170, "x2": 200, "y2": 200}},
+        { "type": "arrow", "id": "l2", "position": {"x1": 400, "y1": 170, "x2": 600, "y2": 200}},
+        { "type": "arrow", "id": "l3", "position": {"x1": 200, "y1": 350, "x2": 200, "y2": 380}},
+        { "type": "arrow", "id": "l4", "position": {"x1": 600, "y1": 350, "x2": 600, "y2": 380}},
+        { "type": "arrow", "id": "l5", "position": {"x1": 200, "y1": 530, "x2": 300, "y2": 600}},
+        { "type": "arrow", "id": "l6", "position": {"x1": 600, "y1": 530, "x2": 500, "y2": 600}},
+        { "type": "arrow", "id": "l7", "position": {"x1": 500, "y1": 630, "x2": 600, "y2": 680}}
 	]
 }

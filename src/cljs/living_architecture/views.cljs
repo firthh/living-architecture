@@ -38,8 +38,7 @@
       (map-indexed (fn [idx m]
                      ^{:key (str "database-" id "-" (:id m))}
                      [metric-component (assoc m :position {:x pad-left :y (+ (* 3 pad-top) (* line-size idx))})])
-                   metrics)]
-     ]))
+                   metrics)]]))
 
 (defn box-component [{:keys [id name metrics] {:keys [x y]} :position}]
   (let [pad-top 20
@@ -60,10 +59,16 @@
                      [metric-component (assoc m :position {:x pad-left :y (+ (* 3 pad-top) (* line-size idx))})])
                    metrics)]]))
 
+(defn arrow-component [{:keys [position]}]
+  [:line (merge {:stroke "black"
+                 :stokeWidth 2}
+                position)])
+
 (defn individual-component [{:keys [type id] :as c}]
   (condp = type
     "box"      [box-component c]
     "database" [database-component c]
+    "arrow"    [arrow-component c]
     ))
 
 (defn diagram-components [diagram]
