@@ -3,21 +3,30 @@
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [cheshire.core :as json]))
+            [cheshire.core :as json]
+            [clojure.java.io :as io]))
+
+(def metric-configuration
+  {"met1" {:source :prometheus
+           :host ""
+           :query ""}
+   "met2" {:source :prometheus
+           :host ""
+           :query ""}
+   "met3" {:source :prometheus
+           :host ""
+           :query ""}
+   "met4" {:source :prometheus
+           :host ""
+           :query ""}})
+
+(def application-config
+  (delay (json/parse-string (slurp (io/file (io/resource "config.json"))) true)))
 
 (defroutes routes
   (GET "/" [] (resource-response "index.html" {:root "public"}))
   (GET "/diagram" [] {:status 200
-                      :body (json/generate-string {:diagram [{:name "Load Balancer 1"
-                                                              :id "lb1"
-                                                              :position {:x 100 :y 100}
-                                                              :metrics [{:id "met1" :name "rps" :value 50}
-                                                                        {:id "met2" :name "latency" :value 100}]}
-                                                             {:name "Load Balancer 2"
-                                                              :id "lb2"
-                                                              :position {:x 500 :y 100}
-                                                              :metrics [{:id "met3" :name "rps" :value 30}
-                                                                        {:id "met4" :name "latency" :value 150}]}]})})
+                      :body (json/generate-string {:diagram (:diagram @application-config)})})
   (GET "/metric-values" [] {:status 200
                             :body (json/generate-string {:metrics {"met1" {:name "" :value 50 :unit "rps"}
                                                                    "met2" {:name "latency" :value 100 :unit "ms"}
