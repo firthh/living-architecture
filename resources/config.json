@@ -1,43 +1,4 @@
 {
-    "diagram": [{
-            "name": "Load Balancer 1",
-            "id": "lb1",
-            "position": {
-                "x": 100,
-                "y": 100
-            },
-            "metrics": [{
-                    "id": "met1",
-                    "name": "rps",
-                    "value": 50
-                },
-                {
-                    "id": "met2",
-                    "name": "latency",
-                    "value": 100
-                }
-            ]
-        },
-        {
-            "name": "Load Balancer 2",
-            "id": "lb2",
-            "position": {
-                "x": 500,
-                "y": 100
-            },
-            "metrics": [{
-                    "id": "met3",
-                    "name": "rps",
-                    "value": 30
-                },
-                {
-                    "id": "met4",
-                    "name": "latency",
-                    "value": 150
-                }
-            ]
-        }
-    ],
     "metric": {
         "avg_http_response_time": {
             "name": "avg_http_response_time",
@@ -60,5 +21,51 @@
             "host": "http://demo.robustperception.io:9090/",
             "query": "sum(http_response_size_bytes_sum)"
         }
-    }
+    },
+	"diagram": [{
+			"name": "Load Balancer 1",
+      "type": "box",
+			"id": "lb1",
+			"position": {
+				"x": 100,
+				"y": 100
+			},
+			"metrics": [{
+					"id": "met1"
+				},
+				{
+					"id": "met2"
+				}
+			]
+		},
+		{
+			"name": "Load Balancer 2",
+      "type": "box",
+			"id": "lb2",
+			"position": {
+				"x": 500,
+				"y": 100
+			},
+			"metrics": [{
+					"id": "met3"
+				},
+				{
+					"id": "met4"
+				}
+			]
+		},
+		{
+			"name": "DB-001",
+      "type": "database",
+			"id": "db001",
+			"position": {
+				"x": 200,
+				"y": 300
+			},
+			"metrics": [{
+					"id": "met5"
+			  }
+			]
+		}
+	]
 }
