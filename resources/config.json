@@ -1,18 +1,46 @@
 {
     "metric": {
-        "avg_http_response_time": {
+        "total_response_time": {
             "name": "Response times",
             "unit": "ms",
             "source": "prometheus",
             "host": "http://demo.robustperception.io:9090/",
             "query": "avg(avg without (quantile)(rate(http_request_duration_microseconds[5m]) >= 0))"
         },
-        "sum_http_requests_handled": {
+        "app_response_time": {
+            "name": "Response times",
+            "unit": "ms",
+            "source": "prometheus",
+            "host": "http://demo.robustperception.io:9090/",
+            "query": "avg(avg without (quantile)(rate(http_request_duration_microseconds{handler=\"prometheus\"}[5m]) >= 0))"
+        },
+        "legacy_response_time": {
+            "name": "Response times",
+            "unit": "ms",
+            "source": "prometheus",
+            "host": "http://demo.robustperception.io:9090/",
+            "query": "avg(avg without (quantile)(rate(http_request_duration_microseconds{handler=\"query\"}[5m]) >= 0))"
+        },
+        "total_request_count": {
             "name": "Sum requests",
             "unit": "",
             "source": "prometheus",
             "host": "http://demo.robustperception.io:9090/",
             "query": "sum(http_requests_total)"
+        },
+        "app_request_count": {
+            "name": "Sum requests",
+            "unit": "",
+            "source": "prometheus",
+            "host": "http://demo.robustperception.io:9090/",
+            "query": "sum(http_requests_total{handler=\"prometheus\"})"
+        },
+        "legacy_request_count": {
+            "name": "Sum requests",
+            "unit": "",
+            "source": "prometheus",
+            "host": "http://demo.robustperception.io:9090/",
+            "query": "sum(http_requests_total{handler=\"query\"})"
         },
         "sum_bytes_sent": {
             "name": "Sent",
@@ -39,10 +67,10 @@
 				"y": 20
 			},
 			"metrics": [{
-					"id": "avg_http_response_time"
+					"id": "total_response_time"
 				},
 				{
-					"id": "sum_http_requests_handled"
+					"id": "total_request_count"
 				}
 			]
 		},
@@ -55,10 +83,10 @@
 				"y": 200
 			},
 			"metrics": [{
-					"id": "avg_http_response_time"
+					"id": "app_response_time"
 				},
 				{
-					"id": "sum_http_requests_handled"
+					"id": "app_request_count"
 				}
 			]
 		},
@@ -71,10 +99,10 @@
 				"y": 380
 			},
 			"metrics": [{
-					"id": "avg_http_response_time"
+					"id": "app_response_time"
 				},
 				{
-					"id": "sum_http_requests_handled"
+					"id": "app_request_count"
 				}
 			]
 		},
@@ -86,7 +114,8 @@
 				"x": 500,
 				"y": 200
 			},
-			  "metrics": []
+			  "metrics": [{"id": "legacy_response_time"},
+                   {"id": "legacy_request_count"}]
 		},
     {
 			"name": "Legacy App server",
@@ -96,7 +125,8 @@
 				"x": 500,
 				"y": 380
 			},
-			  "metrics": []
+			  "metrics": [{"id": "legacy_response_time"},
+                    {"id": "legacy_request_count"}]
 		},
 		{
 			"name": "Master",
@@ -117,7 +147,7 @@
 			"id": "db002",
 			"position": {
 				"x": 600,
-				"y": 650
+				"y": 600
 			},
 			"metrics": [{
 					"id": "disk_usage"

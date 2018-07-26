@@ -25,11 +25,11 @@
            :style {:outline "0px solid black"
                    :background-color "#fff"}}
      [:path {:fill "none" :stroke "black" :stroke-width 2
-             :d "M2 30
+             :d "M1 30
                C 0 0, 200 0, 200 30
-               C 200 60, 0 60, 2 30
+               C 200 60, 0 60, 1 30
                V 150
-               C 2 180, 200 180, 200 150
+               C 1 180, 200 180, 200 150
                V 30"}]
      [:text {:x pad-left :y 0
              :text-anchor "middle"}
