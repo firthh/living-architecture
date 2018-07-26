@@ -14,7 +14,7 @@
   (GET "/diagram" [] {:status 200
                       :body (json/generate-string {:diagram (:diagram (application-config))})})
   (GET "/metric-values" [] {:status 200
-                            :body (json/generate-string (p/query-metrics))})
+                            :body (json/generate-string {:metrics (p/query-metrics)})})
   (GET "/pods" [] {:status 200
                    :body (json/generate-string (k8s/get-pods))})
   (resources "/"))
