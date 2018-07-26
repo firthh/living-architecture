@@ -26,10 +26,12 @@
 
   :profiles
   {:dev
-   {:dependencies [[binaryage/devtools "0.9.10"]
+   {:dependencies [[cider/piggieback "0.3.6"]
+                   [org.clojure/tools.nrepl "0.2.13"]
+                   [binaryage/devtools "0.9.10"]
                    [day8.re-frame/re-frame-10x "0.3.3"]
                    [day8.re-frame/tracing "0.5.1"]]
-
+    :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
     :plugins      [[lein-figwheel "0.5.16"]]}
    :prod { :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]}}
 

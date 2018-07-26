@@ -3,3 +3,6 @@
 /*-init.clj
 /resources/public/js/compiled
 out
+.nrepl-port
+nashorn_code_cache
+.cljs_nashorn_repl
