@@ -3,9 +3,13 @@
                  [org.clojure/clojurescript "1.10.238"]
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
+                 [camel-snake-kebab "0.4.0"]
+                 [com.cemerick/url "0.1.1"]
                  [cljs-ajax "0.7.4"]
                  [compojure "1.5.0"]
                  [cheshire "5.8.0"]
+                 [http-kit "2.2.0"]
+                 [org.clojure/data.json "0.2.6"]
                  [yogthos/config "0.8"]
                  [ring "1.4.0"]]
 
