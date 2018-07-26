@@ -41,8 +41,12 @@
 
 (defn main-panel []
   (let [name (re-frame/subscribe [::subs/name])
-        diagram (re-frame/subscribe [::subs/diagram])]
+        diagram (re-frame/subscribe [::subs/diagram])
+        diagram-id "123"]
     [:div
      [:h1 "Hello from " @name]
-     [:div [:button {:on-click #(re-frame/dispatch [::events/get-diagram "123"])} "Get diagram"]]
+     [:div
+      [:button {:on-click #(re-frame/dispatch [::events/get-diagram diagram-id])} "Get diagram"]
+      [:button {:on-click #(re-frame/dispatch [::events/update-metric-values diagram-id])} "Update metric values"]]
+     [:br]
      [diagram-components @diagram]]))
