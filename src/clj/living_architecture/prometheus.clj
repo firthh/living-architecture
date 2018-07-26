@@ -47,10 +47,10 @@
                       get-path)]
     (get-in response [:data :result 0 :value 1])))
 
-(get-metric "avg(avg without (quantile)(rate(http_request_duration_microseconds[5m]) >= 0))")
+;; (get-metric "avg(avg without (quantile)(rate(http_request_duration_microseconds[5m]) >= 0))")
 
 (defn query-metrics []
-  (let [metrics (:metric @application-config)]
+  (let [metrics (:metric (application-config))]
     (->> metrics
          (map (fn [[k v]]
                 [k (-> v

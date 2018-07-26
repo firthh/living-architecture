@@ -1,25 +1,32 @@
 {
     "metric": {
         "avg_http_response_time": {
-            "name": "avg_http_response_time",
+            "name": "Response times",
             "unit": "ms",
             "source": "prometheus",
             "host": "http://demo.robustperception.io:9090/",
             "query": "avg(avg without (quantile)(rate(http_request_duration_microseconds[5m]) >= 0))"
         },
         "sum_http_requests_handled": {
-            "name": "sum_http_requests_handled",
-            "unit": "requests",
+            "name": "Sum requests",
+            "unit": "",
             "source": "prometheus",
             "host": "http://demo.robustperception.io:9090/",
             "query": "sum(http_requests_total)"
         },
         "sum_bytes_sent": {
-            "name": "sum_bytes_sent",
+            "name": "Sent",
             "unit": "bytes",
             "source": "prometheus",
-            "host": "http://demo.robustperception.io:9090/",
+                   "host": "http://demo.robustperception.io:9090/",
             "query": "sum(http_response_size_bytes_sum)"
+        },
+        "disk_usage": {
+            "name": "Disk usage",
+            "unit": "%",
+            "source": "prometheus",
+            "host": "http://demo.robustperception.io:9090/",
+            "query": "node_filesystem_free{mountpoint=\"/\"} / node_filesystem_size{mountpoint=\"/\"} * 100"
         }
     },
 	"diagram": [{
@@ -31,10 +38,10 @@
 				"y": 100
 			},
 			"metrics": [{
-					"id": "met1"
+					"id": "avg_http_response_time"
 				},
 				{
-					"id": "met2"
+					"id": "sum_http_requests_handled"
 				}
 			]
 		},
@@ -47,10 +54,10 @@
 				"y": 100
 			},
 			"metrics": [{
-					"id": "met3"
+					"id": "avg_http_response_time"
 				},
 				{
-					"id": "met4"
+					"id": "sum_http_requests_handled"
 				}
 			]
 		},
@@ -63,7 +70,7 @@
 				"y": 300
 			},
 			"metrics": [{
-					"id": "met5"
+					"id": "disk_usage"
 			  }
 			]
 		}
