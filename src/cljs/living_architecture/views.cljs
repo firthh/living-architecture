@@ -9,9 +9,12 @@
 (def not-blank?
   (comp not clojure.string/blank?))
 
+(def colours ["black" "black" "green" "#FFD700" "red"])
+
 (defn metric-component [{:keys [position id]}]
   (let [{:keys [name value unit]} @(re-frame/subscribe [::subs/metric-value id])]
-    [:tspan position
+    [:tspan (merge {:fill (rand-nth colours)}
+                   position)
      (when (not-blank? name) (str name " - "))
      value
      (when (not-blank? unit) (str " " unit))]))
@@ -47,13 +50,14 @@
            :width 200 :height 150}
      [:rect {:x 0 :y 0
              :height "100%" :width "100%"
-             :style {:fill "white"
+             :style {:fill "#F0FFFF"
                      :stroke-width 3
                      :stroke "black"}}]
      [:text {:x pad-left :y 0
-             :text-anchor "middle"}
+             :text-anchor "middle"
+             :style {"fontWeight" "bold"}}
       [:tspan {:y pad-top
-               :style {"fontWeight" "bold"}} name]
+               :style {"fontSize" "1.5em"}} name]
       (map-indexed (fn [idx m]
                      ^{:key (str "box-" id "-" (:id m))}
                      [metric-component (assoc m :position {:x pad-left :y (+ (* 3 pad-top) (* line-size idx))})])
@@ -61,7 +65,7 @@
 
 (defn arrow-component [{:keys [position]}]
   [:line (merge {:stroke "black"
-                 :stokeWidth 2}
+                 :stroke-width 2}
                 position)])
 
 (defn individual-component [{:keys [type id] :as c}]
