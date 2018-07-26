@@ -35,9 +35,10 @@
                C 1 180, 200 180, 200 150
                V 30"}]
      [:text {:x pad-left :y 0
-             :text-anchor "middle"}
+             :text-anchor "middle"
+             :style {"fontWeight" "bold"}}
       [:tspan {:y pad-top
-               :style {"fontWeight" "bold"}} name]
+               :style {"fontSize" "1.5em"}} name]
       (map-indexed (fn [idx m]
                      ^{:key (str "database-" id "-" (:id m))}
                      [metric-component (assoc m :position {:x pad-left :y (+ (* 3 pad-top) (* line-size idx))})])
