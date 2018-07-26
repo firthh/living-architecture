@@ -4,7 +4,8 @@
             [cemerick.url :as url]
             [clojure.walk :refer [postwalk]]
             [camel-snake-kebab.core :refer [->kebab-case-keyword]]
-            [clojure.data.json :as json]))
+            [clojure.data.json :as json])
+  (:import java.math.RoundingMode))
 
 (defn kebabify
   "Recursively transforms all map keys from strings to keywords."
@@ -45,7 +46,10 @@
                       url/url-encode
                       (str "/query?query=")
                       get-path)]
-    (get-in response [:data :result 0 :value 1])))
+    (-> response
+        (get-in [:data :result 0 :value 1])
+        bigdec
+        (.setScale 2 RoundingMode/HALF_EVEN))))
 
 ;; (get-metric "avg(avg without (quantile)(rate(http_request_duration_microseconds[5m]) >= 0))")
 
