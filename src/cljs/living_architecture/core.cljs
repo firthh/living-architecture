@@ -3,7 +3,8 @@
    [reagent.core :as reagent]
    [re-frame.core :as re-frame]
    [living-architecture.events :as events]
-   [living-architecture.event-listeners :refer [init-listeners!]] ; not used but the code needs to be required
+   [living-architecture.event-listeners :refer [init-listeners!]]
+   [living-architecture.subs :refer [init-subs!]]
    [living-architecture.views :as views]
    [living-architecture.config :as config]
    ))
@@ -21,6 +22,7 @@
 
 (defn ^:export init []
   (init-listeners!)
+  (init-subs!)
   (re-frame/dispatch-sync [::events/initialize-db])
   (dev-setup)
   (mount-root))

@@ -3,10 +3,18 @@
    [re-frame.core :as re-frame]
    [living-architecture.subs :as subs]
    [living-architecture.events :as events]
-   [living-architecture.http :as http]))
+   [living-architecture.http :as http]
+   [clojure.string]))
 
-(defn metric-component [{:keys [name value position]}]
-  [:tspan position (str name " - " value)])
+(def not-blank?
+  (comp not clojure.string/blank?))
+
+(defn metric-component [{:keys [position id]}]
+  (let [{:keys [name value unit]} @(re-frame/subscribe [::subs/metric-value id])]
+    [:tspan position
+     (when (not-blank? name) (str name " - "))
+     value
+     (when (not-blank? unit) (str " " unit))]))
 
 (def line-size 20)
 
