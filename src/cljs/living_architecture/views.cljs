@@ -9,7 +9,7 @@
 (def not-blank?
   (comp not clojure.string/blank?))
 
-(def colours ["black" "black" "green" "#FFD700" "red"])
+(def colours ["black" "black" "green" "#DAA520" "red"])
 
 (defn metric-component [{:keys [position id]}]
   (let [{:keys [name value unit]} @(re-frame/subscribe [::subs/metric-value id])]
@@ -22,7 +22,7 @@
 (def line-size 20)
 
 (defn database-component [{:keys [id name metrics] {:keys [x y]} :position}]
-  (let [pad-top 30
+  (let [pad-top 35
         pad-left "50%"]
     [:svg {:x x :y y :width 202 :height 400
            :style {:outline "0px solid black"
@@ -45,7 +45,7 @@
                    metrics)]]))
 
 (defn box-component [{:keys [id name metrics] {:keys [x y]} :position}]
-  (let [pad-top 20
+  (let [pad-top 30
         pad-left "50%"]
     [:svg {:x x :y y
            :width 200 :height 150}
