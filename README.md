@@ -6,6 +6,8 @@ What if we could create beautiful architecture diagrams that were also informati
 
 This project aims to do that...
 
+![screenshot](https://github.com/firthh/living-architecture/blob/master/screenshot.png "Screenshot")
+
 What is out of scope:
  - Graphing metrics
  
