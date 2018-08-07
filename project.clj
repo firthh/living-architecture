@@ -5,7 +5,7 @@
                  [re-frame "0.10.5"]
                  [camel-snake-kebab "0.4.0"]
                  [com.cemerick/url "0.1.1"]
-                 [cljs-ajax "0.7.4"]
+                 [firthh/ajax-promises "0.1.1-SNAPSHOT"]
                  [compojure "1.5.0"]
                  [cheshire "5.8.0"]
                  [http-kit "2.2.0"]
