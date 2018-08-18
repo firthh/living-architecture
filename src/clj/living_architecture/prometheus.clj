@@ -46,10 +46,10 @@
                       url/url-encode
                       (str "/query?query=")
                       get-path)]
-    (-> response
-        (get-in [:data :result 0 :value 1])
-        bigdec
-        (.setScale 2 RoundingMode/HALF_EVEN))))
+    (some-> response
+            (get-in [:data :result 0 :value 1])
+            bigdec
+            (.setScale 2 RoundingMode/HALF_EVEN))))
 
 ;; (get-metric "avg(avg without (quantile)(rate(http_request_duration_microseconds[5m]) >= 0))")
 
